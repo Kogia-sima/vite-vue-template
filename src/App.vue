@@ -1,13 +1,19 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <nav>
+    <!-- v-for requires identical key for each block -->
+    <template v-for="(item, idx) in routes" :key="idx">
+      <span v-if="idx !== 0" class="nav-separator"> | </span>
+      <router-link v-bind:to="item.path">{{ item.name }}</router-link>
+    </template>
+  </nav>
+  <router-view />
 </template>
+
+<script setup>
+import router from './router'
+
+const routes = router.getRoutes()
+</script>
 
 <style>
 #app {
